@@ -78,7 +78,8 @@ class SQL_Executioner_Plugin {
 	}	
 
 	public function execute_sql($sql) {
-		if ( !check_admin_referer( 'sql-executioner-submit' ) )
+	
+		if ( !check_admin_referer( 'sql-executioner-submit' ) && !current_user_can('manage_options')) // if the user can't manage options they aren't an admin so it's the same as if it checked to see if they were an admin for security purposes
 			return false;
 
 		$results = array();
